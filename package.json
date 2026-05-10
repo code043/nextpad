@@ -1,5 +1,6 @@
 {
-  "name": "next-notes",
+  "name": "nextpad",
+  "description": "Minimal note-taking web app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
