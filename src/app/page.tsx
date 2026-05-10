@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import Register from "@/components/register";
 
 export default function Home() {
   return (
@@ -10,6 +11,9 @@ export default function Home() {
           corporis. Provident nemo nostrum atque molestiae, aut eveniet ut alias
           labore sunt voluptas placeat odio! Non minima earum facere officiis
           natus.
+          <div className="flex justify-center">
+            <Register />
+          </div>
         </h1>
       </main>
     </div>
