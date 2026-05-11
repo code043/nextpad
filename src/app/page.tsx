@@ -1,6 +1,4 @@
-import Login from "@/components/login";
 import Navbar from "@/components/navbar";
-import Register from "@/components/register";
 
 export default function Home() {
   return (
@@ -13,7 +11,6 @@ export default function Home() {
           labore sunt voluptas placeat odio! Non minima earum facere officiis
           natus.
         </h1>
-      
       </main>
     </div>
   );
