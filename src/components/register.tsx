@@ -1,6 +1,6 @@
 export default function Register() {
   return (
-    <div className="bg-[#272727] flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15">
+    <div className="bg-[#272727] text-white flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15 pt-10">
       <div className="w-full">
         <h1 className="text-center text-4xl font-bold tracking-tight leading-tight">
           Register
