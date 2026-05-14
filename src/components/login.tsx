@@ -1,7 +1,23 @@
 "use client";
-import { loginAction } from "@/actions/login-action";
+import { useAuth } from "@/context/auth";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const { login } = useAuth();
+  const router = useRouter();
+
+  async function handleSubmit(formData: FormData) {
+    try {
+      await login(
+        formData.get("email") as string,
+        formData.get("password") as string,
+      );
+      router.push("/dashboard");
+    } catch (err: unknown) {
+      console.error(err);
+    }
+  }
+
   return (
     <div className="bg-[#272727] text-white  flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15">
       <div className="w-full">
@@ -9,7 +25,7 @@ export default function Login() {
           Login
         </h1>
         <form
-          action={loginAction}
+          action={handleSubmit}
           className="flex flex-col items-start space-y-4 mx-auto"
         >
           <label className="text-sm font-medium mb-1" htmlFor="email">

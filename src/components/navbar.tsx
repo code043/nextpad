@@ -1,8 +1,50 @@
+"use client";
+import { useAuth } from "@/context/auth";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 export default function Navbar() {
+  const { user, loading, logout } = useAuth();
+  const router = useRouter();
+
+  function handleLogout() {
+    logout();
+    router.push("/login");
+  }
+
   return (
-    <header className="bg-[#272727] text-white flex justify-between px-8 py-5 mb-2 shadow-md shadow-blue-950/10">
-      <div>Notes</div>
-      <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+    <header className="bg-[#272727] text-white flex justify-between items-center px-8 py-5 mb-2 shadow-md shadow-blue-950/10">
+      <Link href="/" className="font-semibold text-lg">
+        Notes
+      </Link>
+
+      <div className="flex items-center gap-4">
+        {loading ? (
+          <div className="w-8 h-8 rounded-full bg-zinc-600 animate-pulse" />
+        ) : user ? (
+          <>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold uppercase">
+                {user.email[0]}
+              </div>
+              <span className="text-sm text-zinc-300">{user.email}</span>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="text-sm text-zinc-400 hover:text-white transition-colors"
+            >
+              Sair
+            </button>
+          </>
+        ) : (
+          <Link
+            href="/login"
+            className="text-sm px-4 py-1.5 rounded-md bg-blue-600 hover:bg-blue-500 transition-colors"
+          >
+            Entrar
+          </Link>
+        )}
+      </div>
     </header>
   );
 }

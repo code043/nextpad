@@ -1,9 +1,7 @@
-import Navbar from "@/components/navbar";
 
 export default function Home() {
   return (
     <div className="bg-[#1B1B1B]">
-      <Navbar />
       <main className=" h-225">
         <h1 className="text-white/80">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem,

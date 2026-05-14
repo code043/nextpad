@@ -1,18 +1,15 @@
 export async function loginService(email: string, password: string) {
-  const response = await fetch(
-    "https://nest-notes.onrender.com/api/auth/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-      credentials: "include",
+  const res = await fetch("http://localhost:3000/api/login", {
+    method: "POST",
+    body: JSON.stringify({ email, password }),
+    headers: {
+      "Content-Type": "application/json",
     },
-  );
-  const data = await response.json();
-  if (!response.ok) {
-    throw new Error(data.message || "Login failed!");
+  });
+
+  if (!res.ok) {
+    throw new Error("Erro no login");
   }
-  return data;
+
+  return res.json();
 }
