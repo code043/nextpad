@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 export default function Navbar() {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
-
   function handleLogout() {
     logout();
     router.push("/login");
@@ -25,13 +24,13 @@ export default function Navbar() {
           <>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold uppercase">
-                {user.email[0]}
+                {user.name[0]}
               </div>
-              <span className="text-sm text-zinc-300">{user.email}</span>
+              <span className="text-sm text-zinc-300">{user.name}</span>
             </div>
             <button
               onClick={handleLogout}
-              className="text-sm text-zinc-400 hover:text-white transition-colors"
+              className="text-sm text-zinc-400 hover:text-white transition-colors cursor-pointer"
             >
               Sair
             </button>

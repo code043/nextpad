@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Register() {
   return (
     <div className="bg-[#272727] text-white flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15 pt-10">
@@ -45,9 +47,11 @@ export default function Register() {
             value="Send"
           />
         </form>
-        <h2 className="text-center font-semibold mt-3 ">
-          Already have an account?
-        </h2>
+        <Link href={"/login"}>
+          <h2 className="text-center font-semibold mt-3 ">
+            Already have an account?
+          </h2>
+        </Link>
       </div>
     </div>
   );

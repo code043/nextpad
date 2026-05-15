@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/context/auth";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
@@ -52,7 +53,9 @@ export default function Login() {
             value="Login"
           />
         </form>
-        <h2 className="text-center font-semibold mt-3 ">Register</h2>
+        <h2 className="text-center font-semibold mt-3 ">
+          <Link href={"/register"}>Register</Link>
+        </h2>
       </div>
     </div>
   );
