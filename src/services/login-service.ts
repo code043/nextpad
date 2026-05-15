@@ -6,10 +6,12 @@ export async function loginService(email: string, password: string) {
       "Content-Type": "application/json",
     },
   });
-
+  const data = await res.json();
   if (!res.ok) {
-    throw new Error("Erro no login");
+    return {
+      error: data.message || "Login error",
+    };
   }
 
-  return res.json();
+  return data;
 }
