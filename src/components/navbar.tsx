@@ -22,18 +22,26 @@ export default function Navbar() {
           <div className="w-8 h-8 rounded-full bg-zinc-600 animate-pulse" />
         ) : user ? (
           <>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold uppercase">
-                {user.name[0]}
+            <div className="flex gap-1">
+              <ul className="space-y-2 flex gap-4 list-none">
+                <Link href="/dashboard">Dashboard</Link>
+                <Link href="/dashboard/new">New</Link>
+              </ul>
+              <div>
+                <button
+                  onClick={handleLogout}
+                  className="mx-3 hover:text-red-500 transition-colors cursor-pointer"
+                >
+                  Logout
+                </button>
               </div>
-              <span className="text-sm text-zinc-300">{user.name}</span>
+
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold uppercase">
+                  {user.name[0]}
+                </div>
+              </div>
             </div>
-            <button
-              onClick={handleLogout}
-              className="text-sm text-zinc-400 hover:text-white transition-colors cursor-pointer"
-            >
-              Sair
-            </button>
           </>
         ) : (
           <Link
