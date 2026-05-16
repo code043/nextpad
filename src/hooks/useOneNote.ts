@@ -5,14 +5,13 @@ import { useAuth } from "@/context/auth";
 import { useEffect, useState, useCallback } from "react";
 
 
-export function useNotas() {
+export function useOneNote(id: string) {
   const { user, getAccessToken } = useAuth();
-
-  const [notas, setNotas] = useState<Note[]>([]);
+  const [nota, setNota] = useState<Note | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const loadNotas = useCallback(async () => {
+ 
+  const loadNota = useCallback(async () => {
     const token = getAccessToken();
 
     if (!token) {
@@ -24,39 +23,37 @@ export function useNotas() {
     try {
       setLoading(true);
       setError(null);
-
-      const res = await fetch("http://localhost:8080/api/notes", {
+      const res = await fetch(`http://localhost:8080/api/notes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
         credentials: "include",
       });
-
       if (!res.ok) {
         throw new Error("Erro ao buscar notas");
       }
 
       const data = await res.json();
-      setNotas(data.notas ?? data);
+      setNota(data.nota ?? data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Erro inesperado");
     } finally {
       setLoading(false);
     }
-  }, [getAccessToken]);
+  }, [getAccessToken, id]);
 
   useEffect(() => {
-    if (user) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      loadNotas();
-    } else {
-      setLoading(false);
-    }
-  }, [user, loadNotas]);
+  if (user) {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadNota();
+  } else {
+    setLoading(false);
+  }
+}, [user, loadNota]);
 
   return {
-    notas,
+    nota,
     loading,
     error,
-    reload: loadNotas,
+    reload: loadNota,
   };
 }

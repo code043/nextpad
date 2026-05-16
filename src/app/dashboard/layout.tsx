@@ -22,7 +22,7 @@ export default function DashboardLayout({
   if (!user) return null;
 
   return (
-    <div>
+    <div >
       <nav>Dashboard</nav>
       <main>{children}</main>
     </div>
