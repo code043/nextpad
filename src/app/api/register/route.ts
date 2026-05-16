@@ -1,18 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
 
-  const backendResponse = await fetch(
-    "http://localhost:8080/api/auth/register",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    }
-  );
+  const backendResponse = await fetch(baseURL + "/api/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
 
   const data = await backendResponse.json();
 

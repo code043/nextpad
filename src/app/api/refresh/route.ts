@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function POST(req: NextRequest) {
   const refreshToken = req.cookies.get("refreshToken")?.value;
@@ -6,30 +7,24 @@ export async function POST(req: NextRequest) {
   if (!refreshToken) {
     return NextResponse.json(
       { message: "Refresh token is missing" },
-      { status: 401 }
+      { status: 401 },
     );
   }
 
-  const backendResponse = await fetch(
-    "http://localhost:8080/api/auth/refresh",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${refreshToken}`, 
-      },
-      credentials: 'include',
-    }
-  );
+  const backendResponse = await fetch(baseURL + "/api/auth/refresh", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
+    },
+    credentials: "include",
+  });
 
   let data;
 
   try {
     data = await backendResponse.json();
   } catch {
-    return NextResponse.json(
-      { message: "Backend error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "Backend error" }, { status: 500 });
   }
 
   if (!backendResponse.ok) {
@@ -37,9 +32,8 @@ export async function POST(req: NextRequest) {
   }
 
   const response = NextResponse.json({
-    token: data.access_token, 
+    token: data.access_token,
   });
-
 
   response.cookies.set("refreshToken", data.refresh_token, {
     httpOnly: true,

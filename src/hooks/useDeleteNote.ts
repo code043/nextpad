@@ -2,6 +2,8 @@
 
 import { useAuth } from "@/context/auth";
 import { useState } from "react";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 
 export function useDeleteNote() {
   const { getAccessToken } = useAuth();
@@ -22,7 +24,7 @@ export function useDeleteNote() {
       setError(null);
 
       const res = await fetch(
-        `http://localhost:8080/api/notes/${id}`,
+        `${baseURL}/api/notes/${id}`,
         {
           method: "DELETE",
           headers: {

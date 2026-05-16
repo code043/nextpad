@@ -1,21 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
 
   if (!authHeader) {
-    return NextResponse.json(
-      { message: "Token is missings" },
-      { status: 401 },
-    );
+    return NextResponse.json({ message: "Token is missings" }, { status: 401 });
   }
 
-  const backendResponse = await fetch("http://localhost:8080/api/auth/me", {
+  const backendResponse = await fetch(baseURL + "/api/auth/me", {
     method: "GET",
     headers: {
       Authorization: authHeader,
     },
-    credentials: 'include',
+    credentials: "include",
   });
 
   const data = await backendResponse.json();
@@ -26,4 +25,3 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json(data);
 }
-

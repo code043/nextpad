@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function GET(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
 
@@ -7,7 +9,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ message: "Não autenticado" }, { status: 401 });
   }
 
-  const notesRes = await fetch("http://localhost:8080/api/notes", {
+  const notesRes = await fetch(baseURL + "/api/notes", {
     headers: { Authorization: authHeader },
   });
 
@@ -18,4 +20,3 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json(data);
 }
-

@@ -3,7 +3,7 @@
 import { Note } from "@/app/types/note";
 import { useAuth } from "@/context/auth";
 import { useEffect, useState, useCallback } from "react";
-
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export function useNotes() {
   const { user, getAccessToken } = useAuth();
@@ -25,7 +25,7 @@ export function useNotes() {
       setLoading(true);
       setError(null);
 
-      const res = await fetch("http://localhost:8080/api/notes", {
+      const res = await fetch(baseURL + "/api/notes", {
         headers: { Authorization: `Bearer ${token}` },
         credentials: "include",
       });
@@ -36,7 +36,7 @@ export function useNotes() {
 
       const data = await res.json();
       setNotes(data.notes ?? data);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Somethin went wrong!");
     } finally {

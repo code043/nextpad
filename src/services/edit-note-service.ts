@@ -1,3 +1,5 @@
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function editNoteService(
   title: string,
   content: string,
@@ -5,7 +7,7 @@ export async function editNoteService(
   id: string
 ) {
 
-  const res = await fetch(`http://localhost:8080/api/notes/${id}`, {
+  const res = await fetch(`${baseURL}/api/notes/${id}`, {
     method: 'PATCH',
     headers: { 
       "Authorization": `Bearer ${token}`,

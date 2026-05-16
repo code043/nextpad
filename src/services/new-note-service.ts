@@ -1,10 +1,12 @@
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export async function newNoteService(
   title: string,
   content: string,
   token: string,
 ) {
 
-  const res = await fetch(`http://localhost:8080/api/notes/`, {
+  const res = await fetch(`${baseURL}/api/notes/`, {
     method: 'POST',
     headers: { 
       "Authorization": `Bearer ${token}`,

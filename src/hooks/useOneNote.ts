@@ -3,14 +3,14 @@
 import { Note } from "@/app/types/note";
 import { useAuth } from "@/context/auth";
 import { useEffect, useState, useCallback } from "react";
-
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export function useOneNote(id: string) {
   const { user, getAccessToken } = useAuth();
   const [note, setNote] = useState<Note | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
- 
+
   const loadNote = useCallback(async () => {
     const token = getAccessToken();
 
@@ -23,7 +23,7 @@ export function useOneNote(id: string) {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch(`http://localhost:8080/api/notes/${id}`, {
+      const res = await fetch(`${baseURL}/api/notes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
         credentials: "include",
       });
@@ -33,7 +33,7 @@ export function useOneNote(id: string) {
 
       const data = await res.json();
       setNote(data.note ?? data);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Erro inesperado");
     } finally {
@@ -42,13 +42,13 @@ export function useOneNote(id: string) {
   }, [getAccessToken, id]);
 
   useEffect(() => {
-  if (user) {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadNote();
-  } else {
-    setLoading(false);
-  }
-}, [user, loadNote]);
+    if (user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      loadNote();
+    } else {
+      setLoading(false);
+    }
+  }, [user, loadNote]);
 
   return {
     note,

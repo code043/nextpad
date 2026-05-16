@@ -1,5 +1,5 @@
 export async function registerService(name: string, email: string, password: string) {
-  const res = await fetch("http://localhost:3000/api/register", {
+  const res = await fetch("/api/register", {
     method: "POST",
     body: JSON.stringify({name,  email, password }),
     headers: {

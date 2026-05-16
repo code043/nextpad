@@ -4,7 +4,11 @@ import { useRouter } from "next/navigation";
 
 export default function Register() {
   const router = useRouter();
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
     try {
       await registerAction(formData);
     } catch (err: unknown) {
@@ -12,6 +16,7 @@ export default function Register() {
       console.error(err);
     }
   }
+
   return (
     <div className="bg-[#272727] text-white flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15 pt-15">
       <div className="w-full">
@@ -19,7 +24,7 @@ export default function Register() {
           Register
         </h1>
         <form
-          action={handleSubmit}
+          onSubmit={handleSubmit}
           className="flex flex-col items-start space-y-4 mx-auto"
         >
           <label
@@ -29,7 +34,7 @@ export default function Register() {
             Name
           </label>
           <input
-          name="name"
+            name="name"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
             type="text"
             placeholder="Name..."
@@ -41,7 +46,7 @@ export default function Register() {
             Email
           </label>
           <input
-          name="email"
+            name="email"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
             type="email"
             placeholder="Email..."
@@ -53,13 +58,12 @@ export default function Register() {
             Password
           </label>
           <input
-          name="password"
+            name="password"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
             type="password"
             placeholder="Password..."
           />
           <input
-          
             className="w-full mt-8 px-4 py-2 rounded-md font-medium bg-[#3471FF] text-white cursor-pointer"
             type="submit"
             value="Send"
