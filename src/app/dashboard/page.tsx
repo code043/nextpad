@@ -21,14 +21,17 @@ export default function Dashboard() {
           <div
             key={nota.id}
             className="flex flex-col gap-4 p-4 rounded-lg shadow-sm bg-[#272727] text-white  w-100"
-          >
-            <Link href={`/dashboard/note/${nota.id}`}>
-              <h2 className="text-1xl font-bold tracking-tight">
+          > <h2 className="text-1xl font-bold tracking-tight">
                 {nota.title}
               </h2>
-            </Link>
+           
             <p className="text-base leading-relaxed mt-4 ">{nota?.content}</p>
-            <p className="text-sm">{setDate(nota?.createdAt)}</p>
+            <div className="flex justify-between items-baseline">
+               <Link href={`/dashboard/note/${nota.id}`} className="bg-blue-400 w-20 text-center mt-8 px-1 py-0 rounded-md font-medium">
+              <span className="text-sm">See note</span>
+            </Link>
+            <span className="text-sm">{setDate(nota?.createdAt)}</span>
+            </div>
           </div>
         ))}
       </ul>

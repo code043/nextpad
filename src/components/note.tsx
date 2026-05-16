@@ -1,5 +1,6 @@
 "use client";
 import { useOneNote } from "@/hooks/useOneNote";
+import Link from "next/link";
 
 export default function Note({ id }: { id: string }) {
   const { nota, loading } = useOneNote(id);
@@ -29,6 +30,7 @@ export default function Note({ id }: { id: string }) {
       </h1>
       <p className="text-base leading-relaxed mt-4 ">{nota?.content}</p>
       <p>{setDate(nota?.createdAt)}</p>
+      <Link href={'/dashboard/edit/'+id} className="px-5 py-2 w-20 rounded-md bg-green-400">Edit</Link>
     </div>
   );
 }
