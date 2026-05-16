@@ -29,7 +29,7 @@ export default function NewNote() {
           action={handleSubmit}
           className="flex flex-col items-start space-y-4 mx-auto"
         >
-          <label className="text-sm font-medium mb-1" htmlFor="title">
+          <label className="text-2xl font-medium mb-1" htmlFor="title">
             Title
           </label>
           <input
@@ -38,7 +38,7 @@ export default function NewNote() {
             type="text"
             placeholder="Your title here..."
           />
-          <label className="text-sm font-medium mb-1" htmlFor="content">
+          <label className="text-2xl font-medium mb-1" htmlFor="content">
             Content
           </label>
           <textarea

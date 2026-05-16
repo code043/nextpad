@@ -5,7 +5,7 @@ type Props = {
 export default async function EditPage({ params }: Props) {
   const { id } = await params;
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center py-20 bg-black">
       <EditNote id={id} />
     </div>
   );

@@ -13,7 +13,7 @@ export function useDeleteNote() {
     const token = getAccessToken();
 
     if (!token) {
-      setError("Não autenticado!");
+      setError("Authentication is missing!");
       return;
     }
 
@@ -32,13 +32,13 @@ export function useDeleteNote() {
       );
 
       if (!res.ok) {
-        throw new Error("Erro ao deletar nota");
+        throw new Error("It'is not possible delete note");
       }
 
       return true;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setError(err.message || "Erro inesperado");
+      setError(err.message || "Something went wrong!");
       return false;
     } finally {
       setLoading(false);

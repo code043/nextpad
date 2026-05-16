@@ -12,7 +12,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="bg-[#272727] text-white flex justify-between items-center px-8 py-5 mb-2 shadow-md shadow-blue-950/10">
+    <header className="fixed w-full bg-[#272727] text-white flex justify-between items-center px-8 py-5 mb-2 shadow-md shadow-blue-950/10">
       <Link href="/" className="font-semibold text-lg">
         Notes
       </Link>

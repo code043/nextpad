@@ -113,6 +113,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth fora do provider");
+  if (!context) throw new Error("You are out of provider!");
   return context;
 }

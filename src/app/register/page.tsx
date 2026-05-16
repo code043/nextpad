@@ -3,7 +3,7 @@ import Register from '@/components/register'
 
 export default function register() {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center py-30 bg-black">
       <Register />
     </div>
   )

@@ -20,7 +20,7 @@ export default function Login() {
   }
 
   return (
-    <div className="bg-[#272727] text-white  flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15">
+    <div className="bg-[#272727] text-white  flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125    h-100 px-20 pb-15">
       <div className="w-full">
         <h1 className="text-center text-4xl font-bold tracking-tight leading-tight">
           Login
@@ -35,7 +35,7 @@ export default function Login() {
           <input
             name="email"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
-            type="text"
+            type="email"
             placeholder="Email..."
           />
           <label className="text-sm font-medium mb-1" htmlFor="password">
@@ -44,7 +44,7 @@ export default function Login() {
           <input
             name="password"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
-            type="text"
+            type="password"
             placeholder="Password..."
           />
           <input

@@ -7,7 +7,7 @@ type Props = {
 export default async function NotePage({ params }: Props) {
   const { id } = await params;
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center py-20 bg-black">
       <Note id={id} />
     </div>
   );

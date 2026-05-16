@@ -5,18 +5,18 @@ import { useAuth } from "@/context/auth";
 import { useEffect, useState, useCallback } from "react";
 
 
-export function useNotas() {
+export function useNotes() {
   const { user, getAccessToken } = useAuth();
 
-  const [notas, setNotas] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadNotas = useCallback(async () => {
+  const loadNotes = useCallback(async () => {
     const token = getAccessToken();
 
     if (!token) {
-      setError("Não autenticado!");
+      setError("Authentication is missing");
       setLoading(false);
       return;
     }
@@ -31,14 +31,14 @@ export function useNotas() {
       });
 
       if (!res.ok) {
-        throw new Error("Erro ao buscar notas");
+        throw new Error("Search notes error!");
       }
 
       const data = await res.json();
-      setNotas(data.notas ?? data);
+      setNotes(data.notes ?? data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      setError(err.message || "Erro inesperado");
+      setError(err.message || "Somethin went wrong!");
     } finally {
       setLoading(false);
     }
@@ -47,16 +47,16 @@ export function useNotas() {
   useEffect(() => {
     if (user) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      loadNotas();
+      loadNotes();
     } else {
       setLoading(false);
     }
-  }, [user, loadNotas]);
+  }, [user, loadNotes]);
 
   return {
-    notas,
+    notes,
     loading,
     error,
-    reload: loadNotas,
+    reload: loadNotes,
   };
 }

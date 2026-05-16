@@ -6,8 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Note({ id }: { id: string }) {
-  const router = useRouter()
-  const { nota, loading } = useOneNote(id);
+  const router = useRouter();
+  const { note, loading } = useOneNote(id);
   const { deleteNote, loading: deleting } = useDeleteNote();
 
   async function handleDelete() {
@@ -15,7 +15,7 @@ export default function Note({ id }: { id: string }) {
     if (!ok) return;
 
     await deleteNote(id);
-    router.push('/dashboard')
+    router.push("/dashboard");
   }
 
   function setDate(d: string | undefined) {
@@ -32,9 +32,9 @@ export default function Note({ id }: { id: string }) {
 
   return (
     <div className="flex flex-col gap-4 p-4 rounded-lg shadow-sm bg-[#272727] text-white w-125">
-      <h1 className="text-4xl font-bold">{nota?.title}</h1>
-      <p className="mt-4">{nota?.content}</p>
-      <p>{setDate(nota?.createdAt)}</p>
+      <h1 className="text-4xl font-bold">{note?.title}</h1>
+      <p className="mt-4">{note?.content}</p>
+      <p>{setDate(note?.createdAt)}</p>
 
       <div className="flex justify-between">
         <Link

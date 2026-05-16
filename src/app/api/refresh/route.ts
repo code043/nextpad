@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
 
   if (!refreshToken) {
     return NextResponse.json(
-      { message: "Refresh token ausente" },
+      { message: "Refresh token is missing" },
       { status: 401 }
     );
   }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     data = await backendResponse.json();
   } catch {
     return NextResponse.json(
-      { message: "Erro no backend (sem JSON)" },
+      { message: "Backend error" },
       { status: 500 }
     );
   }

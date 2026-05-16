@@ -7,15 +7,15 @@ import { useEffect, useState, useCallback } from "react";
 
 export function useOneNote(id: string) {
   const { user, getAccessToken } = useAuth();
-  const [nota, setNota] = useState<Note | null>(null);
+  const [note, setNote] = useState<Note | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
  
-  const loadNota = useCallback(async () => {
+  const loadNote = useCallback(async () => {
     const token = getAccessToken();
 
     if (!token) {
-      setError("Não autenticado!");
+      setError("Authentication is missing!");
       setLoading(false);
       return;
     }
@@ -28,11 +28,11 @@ export function useOneNote(id: string) {
         credentials: "include",
       });
       if (!res.ok) {
-        throw new Error("Erro ao buscar notas");
+        throw new Error("I'ts not possible get the note");
       }
 
       const data = await res.json();
-      setNota(data.nota ?? data);
+      setNote(data.note ?? data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.message || "Erro inesperado");
@@ -44,16 +44,16 @@ export function useOneNote(id: string) {
   useEffect(() => {
   if (user) {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadNota();
+    loadNote();
   } else {
     setLoading(false);
   }
-}, [user, loadNota]);
+}, [user, loadNote]);
 
   return {
-    nota,
+    note,
     loading,
     error,
-    reload: loadNota,
+    reload: loadNote,
   };
 }

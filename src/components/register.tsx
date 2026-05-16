@@ -13,7 +13,7 @@ export default function Register() {
     }
   }
   return (
-    <div className="bg-[#272727] text-white flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15 pt-10">
+    <div className="bg-[#272727] text-white flex justify-center gap-4 p-4 rounded-lg shadow-sm w-125 px-20 pb-15 pt-15">
       <div className="w-full">
         <h1 className="text-center text-4xl font-bold tracking-tight leading-tight">
           Register
@@ -43,7 +43,7 @@ export default function Register() {
           <input
           name="email"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
-            type="text"
+            type="email"
             placeholder="Email..."
           />
           <label
@@ -55,7 +55,7 @@ export default function Register() {
           <input
           name="password"
             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring"
-            type="text"
+            type="password"
             placeholder="Password..."
           />
           <input

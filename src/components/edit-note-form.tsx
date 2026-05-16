@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 export default function EditNote({ id }: { id: string }) {
   const router = useRouter();
   const { getAccessToken } = useAuth();
-  const { nota, loading } = useOneNote(id);
+  const { note, loading } = useOneNote(id);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -26,12 +26,12 @@ export default function EditNote({ id }: { id: string }) {
   }
 
   useEffect(() => {
-    if (nota) {
+    if (note) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTitle(nota.title ?? "");
-      setContent(nota.content ?? "");
+      setTitle(note.title ?? "");
+      setContent(note.content ?? "");
     }
-  }, [nota]);
+  }, [note]);
  
   if (loading) {
     return <p>Loading...</p>;
@@ -47,7 +47,7 @@ export default function EditNote({ id }: { id: string }) {
           action={handleSubmit}
           className="flex flex-col items-start space-y-4 mx-auto"
         >
-          <label className="text-sm font-medium mb-1" htmlFor="title">
+          <label className="text-2xl font-medium mb-1" htmlFor="title">
             Title
           </label>
           <input
@@ -58,7 +58,7 @@ export default function EditNote({ id }: { id: string }) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <label className="text-sm font-medium mb-1" htmlFor="content">
+          <label className="text-2xl font-medium mb-1" htmlFor="content">
             Content
           </label>
           <textarea

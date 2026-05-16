@@ -22,8 +22,10 @@ export default function DashboardLayout({
   if (!user) return null;
 
   return (
-    <div className="p-10 ">
-      <h1 className="text-center text-4xl font-bold tracking-tight leading-tight pb-20">Dashboard</h1>
+    <div className=" py-20  bg-black text-white min-h-225">
+      <h1 className="text-center text-4xl font-bold tracking-tight leading-tight">
+        Dashboard
+      </h1>
       <main>{children}</main>
     </div>
   );

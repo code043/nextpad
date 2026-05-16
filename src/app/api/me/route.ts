@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
 
   if (!authHeader) {
     return NextResponse.json(
-      { message: "Token não fornecido" },
+      { message: "Token is missings" },
       { status: 401 },
     );
   }
