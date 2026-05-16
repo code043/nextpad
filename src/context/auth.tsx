@@ -3,8 +3,6 @@
 import { User } from "@/app/types/user";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
-
-
 type AuthContextType = {
   user: User | null;
   loading: boolean;
@@ -25,7 +23,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
-      credentials: "include", 
+      credentials: "include",
     });
 
     if (!res.ok) throw new Error("Erro no login!");
@@ -36,7 +34,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await loadUser(data.token);
   }
 
-  
   async function loadUser(token?: string) {
     const accessToken = token ?? accessTokenRef.current;
 
@@ -65,7 +62,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const res = await fetch("/api/refresh", {
         method: "POST",
-        credentials: "include", 
+        credentials: "include",
       });
 
       if (!res.ok) return false;
@@ -80,12 +77,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  function logout() {
+  async function logout() {
+    await fetch("/api/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
     accessTokenRef.current = null;
     setUser(null);
   }
 
- 
   useEffect(() => {
     async function init() {
       await loadUser();
@@ -96,7 +97,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, getAccessToken: () => accessTokenRef.current }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        logout,
+        getAccessToken: () => accessTokenRef.current,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
