@@ -1,19 +1,40 @@
-import { registerAction } from "@/actions/register-action";
+"use client";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Register() {
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setError(null);
 
     const formData = new FormData(e.currentTarget);
 
     try {
-      await registerAction(formData);
-    } catch (err: unknown) {
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          password: formData.get("password"),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Erro ao registrar");
+        return;
+      }
+
       router.push("/login");
-      console.error(err);
+    } catch {
+      setError("Erro inesperado, tente novamente");
     }
   }
 
@@ -27,10 +48,7 @@ export default function Register() {
           onSubmit={handleSubmit}
           className="flex flex-col items-start space-y-4 mx-auto"
         >
-          <label
-            className="text-sm font-medium text-gray-300 mb-1"
-            htmlFor="name"
-          >
+          <label className="text-sm font-medium text-gray-300 mb-1" htmlFor="name">
             Name
           </label>
           <input
@@ -39,10 +57,7 @@ export default function Register() {
             type="text"
             placeholder="Name..."
           />
-          <label
-            className="text-sm font-medium text-gray-300 mb-1"
-            htmlFor="email"
-          >
+          <label className="text-sm font-medium text-gray-300 mb-1" htmlFor="email">
             Email
           </label>
           <input
@@ -51,10 +66,7 @@ export default function Register() {
             type="email"
             placeholder="Email..."
           />
-          <label
-            className="text-sm font-medium text-gray-300 mb-1"
-            htmlFor="password"
-          >
+          <label className="text-sm font-medium text-gray-300 mb-1" htmlFor="password">
             Password
           </label>
           <input
@@ -63,14 +75,17 @@ export default function Register() {
             type="password"
             placeholder="Password..."
           />
+          {error && (
+            <p className="text-red-400 text-sm w-full text-center">{error}</p>
+          )}
           <input
             className="w-full mt-8 px-4 py-2 rounded-md font-medium bg-[#3471FF] text-white cursor-pointer"
             type="submit"
             value="Send"
           />
         </form>
-        <Link href={"/login"}>
-          <h2 className="text-center font-semibold mt-3 ">
+        <Link href="/login">
+          <h2 className="text-center font-semibold mt-3">
             Already have an account?
           </h2>
         </Link>
