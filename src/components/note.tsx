@@ -15,11 +15,11 @@ export default function Note({ id }: { id: string }) {
     if (!ok) return;
 
     await deleteNote(id);
-    router.push("/dashboard");
+    router.push("/dashboard"); 
   }
 
   function setDate(d: string | undefined) {
-    if (typeof d !== "string") return "error";
+    if (typeof d !== "string") return "error"
     const date = new Date(d);
     return date.toLocaleDateString("pt-BR", {
       day: "2-digit",
