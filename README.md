@@ -33,5 +33,7 @@ npm run dev
 
 ### Next.js
 
+
+
 - **Install:** https://nextjs.org/docs/app/getting-started/installation
-- **Repository:** https://github.com/vercel/next.js
+- **Repository:** https://github.com/vercel/next.js 
